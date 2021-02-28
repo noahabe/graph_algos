@@ -19,7 +19,7 @@ struct Edge {
 class WGraph { 
 public:
 	std::vector<std::vector<Edge>> v;
-	std::vector<int>& operator[](int x) {
+	std::vector<Edge>& operator[](int x) {
 		return v[x];
 	}
 	int order() { return v.size()-1; }
