@@ -6,9 +6,11 @@ UNDIRECTED = 1
 DIRECTED   = 2
 WEIGHTED   = 3  
 
+UPPER_BOUND_FOR_NO_OF_VERTICES = 50 
+
 def generate(kind_of_graph)->list: 
 	# n is the number of vertices
-	n = random.randint(1,1000)
+	n = random.randint(1,UPPER_BOUND_FOR_NO_OF_VERTICES)
 
 	# m is number of edges
 	if n == 1:
@@ -75,7 +77,7 @@ if __name__ == '__main__':
 		
 	result = generate(option)
 	####[parse the result]######
-	print(result[0],' ', result[1])
+	print(result[0],result[1])
 	for edge in result[2]:
 		for i in edge:
 			print(i,end=' ')	
