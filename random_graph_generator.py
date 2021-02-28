@@ -10,8 +10,10 @@ def generate(kind_of_graph)->list:
 	# n is the number of vertices
 	n = random.randint(1,1000)
 
-	#m is number of edges
-	if kind_of_graph == UNDIRECTED:
+	# m is number of edges
+	if n == 1:
+		m = 0
+	elif kind_of_graph == UNDIRECTED:
 		m = random.randint(1,int(n*(n-1)/2))
 	else: #directed or weighted 
 		m = random.randint(1,int(n*(n-1)))
@@ -20,7 +22,7 @@ def generate(kind_of_graph)->list:
 	# the graph that is going to be generated is a simple graph
 	# i.e. no self loops and
 	#      no multiple edges b/n two vertices  
-	while len(edges) <= m: 	
+	while len(edges) < m: 	
 		u = random.randint(1,n)
 		v = random.randint(1,n)
 
@@ -60,7 +62,7 @@ if __name__ == '__main__':
 		dest='kind_of_graph',
 		default='undirected',
 		help='specify what kind of graph you want to generate. [undirected][directed][weighted]')
-	values = parser.parse_args()
+	values = parser.parse_args().kind_of_graph
 	option = None
 	if values == "undirected":
 		option = UNDIRECTED
@@ -70,4 +72,11 @@ if __name__ == '__main__':
 		option = WEIGHTED	
 	else:
 		sys.exit("[-] Unknown parameter passed")
-	print(generate(option))
+		
+	result = generate(option)
+	####[parse the result]######
+	print(result[0],' ', result[1])
+	for edge in result[2]:
+		for i in edge:
+			print(i,end=' ')	
+		print('')
