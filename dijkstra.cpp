@@ -9,7 +9,9 @@ void dijkstra(WGraph& G, int s,
 
 	auto relax = [&](int u, int v, int w) {
 		// w is the weight of the edge (u,v)
-		if (estimate[v] > estimate[u] + w) { 
+		if (estimate[u] == INT_MAX)
+			return;
+		else if (estimate[v] > estimate[u] + w) { 
 			estimate[v] = estimate[u] + w;
 			predecessor[v] = u;
 		}  
@@ -40,6 +42,9 @@ int main(void) {
 	estimate[s] = 0;
 	predecessor[s] = -2;
 	dijkstra(G,s,estimate,predecessor);
+	
+	if (estimate[v] == INT_MAX)
+		estimate[v] = -1;
 	std::cout << estimate[v] << std::endl;
 	return 0;
 }
