@@ -23,6 +23,7 @@ struct Edge {
 class WUGraph { 
 private:
 	std::vector<std::vector<Edge>> v;
+	std::vector<Edge> alledges;
 public:
 	friend std::istream& operator>>(std::istream& is, WUGraph& G);
 	std::vector<Edge>& operator[](int x) {
@@ -32,13 +33,16 @@ public:
 	std::vector<Edge> get_all_edges(); 
 };
 
+#define for_each_vertex(v,G)  for (int v = 1; v <= G.order(); ++v)
+
 std::vector<Edge> WUGraph::get_all_edges() {
-	std::vector<Edge> retval;
+	/*std::vector<Edge> retval;
 	retval.reserve(this->order()/2); // this is just my herueistics
 	for_each_vertex(u,(*this))
 		for (Edge& e:v[u])
 			retval.push_back(e);
-	return retval;	
+	return retval;*/
+	return this->alledges;	
 }
 
 std::istream& operator>>(std::istream& is, WUGraph& G) {
@@ -51,9 +55,9 @@ std::istream& operator>>(std::istream& is, WUGraph& G) {
 		is >> u1 >> u2 >> w;
 		G.v[u1].emplace_back(u1,u2,w);
 		G.v[u2].emplace_back(u1,u2,w);	
+		G.alledges.emplace_back(u1,u2,w);
 	}	
 	return is;
 }
 
-#define for_each_vertex(v,G)  for (int v = 1; v <= G.order(); ++v)
 
