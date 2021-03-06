@@ -17,6 +17,7 @@ std::vector<Edge> mst_kruskal(WUGraph& G) {
 			D.find_set(all_edges[e].vertex2))
 			continue;
 		spanning_tree.push_back(all_edges[e]);	
+		D.union_(all_edges[e].vertex1,all_edges[e].vertex2);
 	}	
 	return spanning_tree;
 }
